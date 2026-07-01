@@ -104,7 +104,7 @@ def show_pull_request_review():
 
         st.metric(
             "Comments",
-            pull_request.get("comments"),
+            pull_request.get("comments", 0),
         )
 
     st.markdown("### Pull Request Description")
