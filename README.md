@@ -17,6 +17,7 @@
 ![Forks](https://img.shields.io/github/forks/satya66123/AI-GitHub-Engineer?style=for-the-badge)
 ![Issues](https://img.shields.io/github/issues/satya66123/AI-GitHub-Engineer?style=for-the-badge)
 ![Last Commit](https://img.shields.io/github/last-commit/satya66123/AI-GitHub-Engineer?style=for-the-badge)
+![Status](https://img.shields.io/badge/Status-Stable-success?style=for-the-badge)
 
 
 ---
