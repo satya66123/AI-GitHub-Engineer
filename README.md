@@ -224,14 +224,33 @@ OLLAMA_URL=http://localhost:11434/api/generate
 
 Add screenshots of:
 
-* Dashboard
-* Repository Explorer
-* AI Repository Analysis
-* AI Code Analysis
-* Repository Score
-* AI Chat
-* Pull Request Review
-* Engineering Dashboard
+## Dashboard
+
+![Dashboard](assets/dashboard.png)
+
+## Repository Analysis
+
+![Repository Analysis](assets/repoAnalysis.png)
+
+## Engineering Dashboard
+
+![Engineering Dashboard](assets/EngDashboard.png)
+
+## AI Code Analysis
+
+![Repository Analysis](assets/codeAnalysis.png)
+
+## Repository Score
+
+![Engineering Dashboard](assets/repoScore.png)
+
+## AI Chat
+
+![Engineering Dashboard](assets/aichat.png)
+
+## Pull Request Review
+
+![Engineering Dashboard](assets/prr.png)
 
 ---
 
