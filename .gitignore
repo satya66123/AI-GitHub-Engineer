@@ -3,6 +3,9 @@ __pycache__/
 *.py[codz]
 *$py.class
 
+#environment
+.env
+
 # C extensions
 *.so
 
@@ -148,7 +151,7 @@ activemq-data/
 *.sage.py
 
 # Environments
-.env
+.env.example
 .envrc
 .venv
 env/
@@ -180,6 +183,24 @@ dmypy.json
 
 # Cython debug symbols
 cython_debug/
+
+
+# Python
+*.pyc
+.venv/
+
+# Streamlit
+.streamlit/
+
+# Logs
+logs/
+
+# IDE
+.vscode/
+.idea/
+
+# token
+token.txt
 
 # PyCharm
 #   JetBrains specific template is maintained in a separate JetBrains.gitignore that can
