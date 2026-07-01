@@ -1,9 +1,65 @@
+# app.py
+
 import streamlit as st
 
 from src.api.github_api import GitHubAPI
-from src.ui.sidebar import show_sidebar
+
+from src.utils.session import SessionManager
+
+# ---------------- Phase 1 ----------------
+
 from src.ui.dashboard import show_dashboard
 from src.ui.repository import show_repository
+
+# ---------------- Phase 3 ----------------
+
+from src.ui.ai_analysis import show_ai_analysis
+from src.ui.code_analysis import show_code_analysis
+from src.ui.reports import show_reports
+from src.ui.ai_chat import show_ai_chat
+from src.ui.chat_history import show_chat_history
+
+# ---------------- Phase 4 ----------------
+
+from src.ui.engineering_dashboard import (
+    show_engineering_dashboard,
+)
+
+from src.ui.pull_request_review import (
+    show_pull_request_review,
+)
+
+from src.ui.commit_analysis import (
+    show_commit_analysis,
+)
+
+from src.ui.issue_generator import (
+    show_issue_generator,
+)
+
+from src.ui.test_generator import (
+    show_test_generator,
+)
+
+from src.ui.repository_score import (
+    show_repository_score,
+)
+
+from src.ui.repository_chat import (
+    show_repository_chat,
+)
+
+# ---------------- Common ----------------
+
+from src.ui.settings import show_settings
+from src.ui.logs import show_logs
+from src.ui.about import show_about
+from src.ui.sidebar import show_sidebar
+
+
+# ----------------------------------------------------
+# Streamlit
+# ----------------------------------------------------
 
 st.set_page_config(
     page_title="AI GitHub Engineer",
@@ -11,58 +67,92 @@ st.set_page_config(
     layout="wide",
 )
 
+SessionManager.initialize()
+
+# ----------------------------------------------------
+# GitHub
+# ----------------------------------------------------
+
 github = GitHubAPI()
+
 user = github.get_authenticated_user()
+
+if user is None:
+
+    st.error("Unable to connect to GitHub.")
+
+    st.stop()
+
+# ----------------------------------------------------
+# Sidebar
+# ----------------------------------------------------
 
 page = show_sidebar(user)
 
-if page == "🏠 Dashboard":
-    show_dashboard()
+# ----------------------------------------------------
+# Routing
+# ----------------------------------------------------
 
-elif page == "📂 Repository Explorer":
-    show_repository()
+match page:
 
-elif page == "⚙️ Settings":
+    # ---------------- Phase 1 ----------------
 
-    st.title("⚙️ Settings")
+    case "🏠 Dashboard":
+        show_dashboard()
 
-    st.info("Settings page will be implemented in Phase 3.")
+    case "📂 Repository Explorer":
+        show_repository()
 
-elif page == "📄 Logs":
+    # ---------------- Phase 3 ----------------
 
-    st.title("📄 Logs")
+    case "🤖 AI Repository Analysis":
+        show_ai_analysis()
 
-    st.info("Log viewer will be implemented in Phase 3.")
+    case "💻 AI Code Analysis":
+        show_code_analysis()
 
-elif page == "ℹ️ About":
+    case "📊 AI Reports":
+        show_reports()
 
-    st.title("ℹ️ About")
+    case "💬 AI Chat":
+        show_ai_chat()
 
-    st.markdown("""
-# AI GitHub Engineer
+    case "📝 Chat History":
+        show_chat_history()
 
-Version **1.0**
+    # ---------------- Phase 4 ----------------
 
-An AI-powered GitHub engineering platform built with:
+    case "👨‍💻 Engineering Dashboard":
+        show_engineering_dashboard()
 
-- 🐍 Python
-- 🎈 Streamlit
-- 🐙 GitHub REST API
-- 🤖 Ollama (coming soon)
-- 🧠 OpenAI (optional)
-- ⚡ MCP-ready architecture
+    case "🔀 Pull Request Review":
+        show_pull_request_review()
 
-### Current Phase
+    case "📝 Commit Analysis":
+        show_commit_analysis()
 
-✅ Phase 1 - GitHub API Foundation
+    case "🐞 Issue Generator":
+        show_issue_generator()
 
-✅ Phase 2 - Repository Explorer Dashboard
+    case "🧪 Test Generator":
+        show_test_generator()
 
-Upcoming:
+    case "📈 Repository Score":
+        show_repository_score()
 
-- AI Repository Analysis
-- Code Review
-- AI Chat
-- GitHub Automation
-- AI Coding Agent
-""")
+    case "💬 Repository Chat":
+        show_repository_chat()
+
+    # ---------------- Common ----------------
+
+    case "⚙️ Settings":
+        show_settings()
+
+    case "📄 Logs":
+        show_logs()
+
+    case "ℹ️ About":
+        show_about()
+
+    case _:
+        show_dashboard()

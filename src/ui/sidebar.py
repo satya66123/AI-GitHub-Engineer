@@ -2,9 +2,6 @@ import streamlit as st
 
 
 def show_sidebar(user=None):
-    """
-    Displays the application sidebar.
-    """
 
     with st.sidebar:
 
@@ -17,11 +14,41 @@ def show_sidebar(user=None):
         page = st.radio(
             "Navigation",
             [
+
                 "🏠 Dashboard",
+
                 "📂 Repository Explorer",
+
+                "🤖 AI Repository Analysis",
+
+                "💻 AI Code Analysis",
+
+                "📊 AI Reports",
+
+                "💬 AI Chat",
+
+                "📝 Chat History",
+
+                "👨‍💻 Engineering Dashboard",
+
+                "🔀 Pull Request Review",
+
+                "📝 Commit Analysis",
+
+                "🐞 Issue Generator",
+
+                "🧪 Test Generator",
+
+                "📈 Repository Score",
+
+                "💬 Repository Chat",
+
                 "⚙️ Settings",
+
                 "📄 Logs",
+
                 "ℹ️ About",
+
             ],
         )
 
@@ -29,19 +56,24 @@ def show_sidebar(user=None):
 
         if user:
 
-            st.subheader("GitHub User")
+            st.subheader("GitHub Profile")
 
-            st.write(f"**Username:** {user['login']}")
+            st.write(f"👤 **{user['login']}**")
 
-            st.write(f"**Followers:** {user['followers']}")
+            st.write(f"📦 Public Repos : {user['public_repos']}")
 
-            st.write(f"**Following:** {user['following']}")
+            st.write(f"👥 Followers : {user['followers']}")
 
-            st.write(f"**Public Repos:** {user['public_repos']}")
+            st.write(f"➡ Following : {user['following']}")
+
+            st.write(f"⭐ Public Gists : {user['public_gists']}")
 
         st.divider()
 
+        st.success("GitHub Connected")
+
         st.caption("AI GitHub Engineer")
-        st.caption("Built with ❤️ using Streamlit & GitHub API")
+        st.caption("Powered by GitHub API")
+        st.caption("Supports Ollama & OpenAI")
 
     return page

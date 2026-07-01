@@ -1,0 +1,8 @@
+streamlit
+python-dotenv
+requests
+httpx
+mcp
+openai
+python-docx
+reportlab
