@@ -54,6 +54,23 @@ def show_sidebar(user=None):
 
         st.divider()
 
+        if st.button("🚪 Logout", use_container_width=True):
+
+            keys = [
+                "logged_in",
+                "token",
+                "user",
+            ]
+
+            for key in keys:
+                st.session_state.pop(key, None)
+
+            st.success("Logged out successfully.")
+
+            st.rerun()
+
+        st.divider()
+
         if user:
 
             st.subheader("GitHub Profile")
