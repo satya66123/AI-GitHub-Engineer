@@ -55,6 +55,7 @@ from src.ui.settings import show_settings
 from src.ui.logs import show_logs
 from src.ui.about import show_about
 from src.ui.sidebar import show_sidebar
+from src.ui.login import show_login
 
 
 # ----------------------------------------------------
@@ -72,7 +73,16 @@ SessionManager.initialize()
 # ----------------------------------------------------
 # GitHub
 # ----------------------------------------------------
+if "logged_in" not in st.session_state:
+    st.session_state.logged_in = False
 
+if not st.session_state.logged_in:
+
+    
+
+    show_login()
+
+    st.stop()
 github = GitHubAPI()
 
 user = github.get_authenticated_user()

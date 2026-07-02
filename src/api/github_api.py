@@ -9,12 +9,15 @@ class GitHubAPI:
     GitHub REST API Client
     """
 
-    def __init__(self):
+    def __init__(self,token=None):
+
+        if token is None:
+            token = settings.GITHUB_TOKEN
 
         self.base_url = settings.GITHUB_API_URL
 
         self.headers = {
-            "Authorization": f"Bearer {settings.GITHUB_TOKEN}",
+            "Authorization": f"Bearer {token}",
             "Accept": "application/vnd.github+json",
             "X-GitHub-Api-Version": "2022-11-28",
         }
