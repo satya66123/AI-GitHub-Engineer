@@ -46,29 +46,61 @@ to provide intelligent repository analysis, code review, documentation generatio
 # 🏛️ High-Level Architecture
 
 ```text
-                    User
-                      │
-                      ▼
-             Streamlit Web UI
-                      │
-      ┌───────────────┼───────────────┐
-      │                               │
-      ▼                               ▼
- GitHub REST API               AI Providers
-      │                      ┌─────────────┐
-      │                      │ OpenAI      │
-      │                      │ Ollama      │
-      └───────────────┬──────┴─────────────┘
-                      ▼
-             AI Engineering Layer
-                      │
-      ┌───────────────┼────────────────┐
-      ▼               ▼                ▼
- Repository      Code Analysis     Reports
- Analysis         Security          Chat
-                      │
-                      ▼
-                 Streamlit Output
+                                                        User
+                                      │
+                                      ▼
+                          Streamlit Web Application
+                                      │
+                                      ▼
+                         GitHub Login & Authentication
+                                      │
+                          (GitHub Personal Access Token)
+                                      │
+                         Token Validation (GitHub API)
+                                      │
+                     ┌────────────────┴────────────────┐
+                     │                                 │
+                  Invalid                           Valid
+                     │                                 │
+             Display Error                    Session Authentication
+                                                       │
+                                                       ▼
+                          ┌────────────────────────────────────────┐
+                          │            Main Dashboard              │
+                          └────────────────────────────────────────┘
+                                       │
+               ┌───────────────────────┼────────────────────────┐
+               │                       │                        │
+               ▼                       ▼                        ▼
+        Repository Explorer      AI Repository          Engineering Dashboard
+                                 Analysis
+               │                       │                        │
+               └───────────────┬───────┴───────────────┬────────┘
+                               ▼                       ▼
+                       GitHub REST API          AI Provider Layer
+                               │             ┌──────────────────────┐
+                               │             │      OpenAI          │
+                               │             │      Ollama          │
+                               │             └──────────────────────┘
+                               └───────────────┬────────────────────┘
+                                               ▼
+                                  AI Engineering Modules
+                                               │
+         ┌──────────────┬──────────────┬──────────────┬──────────────┐
+         ▼              ▼              ▼              ▼
+ Repository       Code Analysis   Repository     Pull Request
+ Analysis                         Score          Review
+
+         ┌──────────────┬──────────────┬──────────────┬──────────────┐
+         ▼              ▼              ▼              ▼
+ Commit Analysis  Issue Generator  Test Generator   AI Chat
+
+                                               │
+                                               ▼
+                                    Markdown Reports & UI
+                                               │
+                                               ▼
+                                    Streamlit Web Interface
 ```
 
 ---
@@ -76,31 +108,42 @@ to provide intelligent repository analysis, code review, documentation generatio
 # 🔄 Request Flow
 
 ```text
-User Request
-      │
-      ▼
-Streamlit UI
-      │
-      ▼
-GitHub Repository
-      │
-      ▼
-Repository Metadata
-      │
-      ▼
-AI Prompt Builder
-      │
-      ▼
-OpenAI / Ollama
-      │
-      ▼
-AI Response
-      │
-      ▼
-Formatted Markdown
-      │
-      ▼
-Download / Display
+                User
+                  │
+                  ▼
+         Streamlit Web UI
+                  │
+                  ▼
+      GitHub Authentication
+                  │
+                  ▼
+      Repository Selection
+                  │
+                  ▼
+      GitHub REST API
+                  │
+                  ▼
+     Repository Metadata
+                  │
+                  ▼
+      AI Prompt Builder
+                  │
+                  ▼
+    AI Provider Selection
+          │            │
+          ▼            ▼
+      OpenAI       Ollama
+          │            │
+          └──────┬─────┘
+                 ▼
+          AI Response
+                 │
+                 ▼
+     Markdown Formatter
+                 │
+        ┌────────┴────────┐
+        ▼                 ▼
+ Display in UI      Download Report
 ```
 
 ---
@@ -215,21 +258,28 @@ src/
 
 # 🤖 AI Module Architecture
 
-```text
-GitHubEngineer
-        │
-        ▼
-EngineeringAssistant
-        │
- ┌──────┼─────────────┐
- ▼      ▼             ▼
-Repository     Code      Reports
-Analysis      Review
- │             │
- ▼             ▼
-OpenAI      Ollama
-```
+# 🤖 AI Module Architecture
 
+```text
+                    AI Modules
+                        │
+        ┌───────────────┼────────────────┐
+        │               │                │
+        ▼               ▼                ▼
+Repository        Repository       Future AI
+Analyzer          Scorer           Modules
+        │               │
+        └───────┬───────┘
+                ▼
+        AI Provider Layer
+        ┌────────┴────────┐
+        ▼                 ▼
+   OpenAI Client     Ollama Client
+        │                 │
+        └────────┬────────┘
+                 ▼
+          AI Generated Response
+```
 ---
 
 # 🧩 Core AI Modules

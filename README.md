@@ -116,25 +116,30 @@ The project demonstrates modern AI application architecture with support for bot
 # 🏗 Architecture
 
 ```text
-                GitHub REST API
-                       │
-             Repository Information
-                       │
-         ┌─────────────▼─────────────┐
-         │     AI GitHub Engineer    │
-         └─────────────┬─────────────┘
-                       │
-        ┌──────────────┼──────────────┐
-        │                             │
-     OpenAI                      Ollama
-        │                             │
-        └──────────────┬──────────────┘
-                       │
-            AI Engineering Modules
-                       │
-        Streamlit Professional UI
+                    User
+                      │
+                      ▼
+             Streamlit Professional UI
+                      │
+        ┌─────────────┼─────────────┐
+        │                           │
+        ▼                           ▼
+ GitHub REST API             AI Engineering Modules
+        │                           │
+        ▼                           ▼
+ Repository Information      AI Provider Layer
+                                  │
+                         ┌────────┴────────┐
+                         ▼                 ▼
+                      OpenAI            Ollama
+                         │                 │
+                         └────────┬────────┘
+                                  ▼
+                          AI Generated Response
+                                  │
+                                  ▼
+                     Streamlit Professional UI
 ```
-
 ---
 
 # 🛠 Technology Stack
